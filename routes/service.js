@@ -36,4 +36,12 @@ router.post('/divisas', function(req, res, next) {
     let solucion = (body.cantidad * cambio[indiceMC])/cambio[indiceMO]
     res.status(200).json({"msn" :"el cambio es " + solucion });
 });
+
+router.post('/interes', function (req, res, next) {
+    var body = req.body;
+    let interes = (body.interes/100) / 12 ; //pocentaje por cada mes
+    let tiempo = body.tiempo * 12 ; //conversion de años a meses
+    let respuesta = (body.monto * interes * Math.pow(1+ interes , tiempo )) /( Math.pow(1+interes , tiempo) -1 );
+    res.status(200).json({"msn" :"el pago que debe hacer mensualmente para terminar de pagar es " + respuesta });
+ });
 module.exports = router;
