@@ -6,4 +6,10 @@ router.get('/', function(req, res, next) {
         msn: "Hola mundo"
     });
 });
+
+router.post('/test', function(req, res, next) {
+    req.body["msn"] = "por el servidor"
+    var data = req.body
+    res.status(200).json(data);
+});
 module.exports = router;
